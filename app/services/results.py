@@ -13,7 +13,8 @@ from starlette.responses import StreamingResponse
 from typing_extensions import Annotated
 
 from app.config.settings import Settings
-from app.database.tables.experiments import ExperimentResult, Experiment
+from app.database.tables.experiments import Experiment
+from app.database.tables.results import ExperimentResult
 from app.models.info import Info
 from app.services.utility.files import upload_file
 

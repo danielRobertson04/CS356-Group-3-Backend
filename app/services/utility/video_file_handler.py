@@ -30,4 +30,4 @@ def delete_video_file(file_path):
         print("The video file does not exist")
 
 def retrieve_video_file(file_path):
-    return cv2.VideoCapture(file_path)
+    return open(file_path, 'rb')

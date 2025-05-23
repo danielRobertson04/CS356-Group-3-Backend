@@ -18,7 +18,7 @@ class Video(BaseModel):
     Video
     """  # noqa: E501
     id: Optional[StrictStr] = None
-    video: Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]] = None
+    videoPath: Optional[StrictStr] = None
     frame_rate: Optional[StrictStr] = Field(default=None, alias="frameRate")
     resolution: Optional[StrictStr] = None
     created_date: Optional[datetime] = Field(default=None, alias="createdDate")

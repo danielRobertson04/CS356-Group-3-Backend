@@ -1,6 +1,5 @@
 from fastapi.testclient import TestClient
 
-
 from pydantic import Field, StrictBytes, StrictStr  # noqa: F401
 from typing import Any, List, Optional, Tuple, Union  # noqa: F401
 from typing_extensions import Annotated  # noqa: F401
@@ -15,20 +14,33 @@ def test_create_experiment(client: TestClient):
 
     Create a new experiment.
     """
-    experiment_input = {"network_conditions":{"delay":"100ms","packet_loss":"1%"},"metrics_requested":["PSNR","SSIM"],"encoding_parameters":{"codec":"H.264","bitrate":"5000kbps","resolution":"1920x1080"},"description":"Experiment description text here","video_sources":["video1.mp4","video2.mp4"],"experiment_name":"Video Encoding Test"}
-
+    experiment_input = {
+        "experimentName": "Streaming Test A",
+        "description": "Testing encoding and network parameters",
+        "videoSources": ["intro.mp4", "main.mp4"],
+        "encodingParameters": {
+            "codec": "h265",
+            "bitrate": "3000",
+            "resolution": "1280x720"
+        },
+        "networkConditions": {
+            "packet_loss": "0.01",
+            "delay": "100"
+        },
+        "metricsRequested": ["latency", "packetLoss", "bitrate"]
+    }
     headers = {
     }
     # uncomment below to make a request
-    # response = client.request(
-    #    "POST",
-    #    "/experiments",
-    #    headers=headers,
-    #    json=experiment_input,
-    # )
+    response = client.request(
+        "POST",
+        "/experiments",
+        headers=headers,
+        json=experiment_input,
+    )
 
     # uncomment below to assert the status code of the HTTP response
-    # assert response.status_code == 200
+    assert response.status_code == 200
 
 
 def test_delete_experiment(client: TestClient):
@@ -40,14 +52,14 @@ def test_delete_experiment(client: TestClient):
     headers = {
     }
     # uncomment below to make a request
-    #response = client.request(
-    #    "DELETE",
-    #    "/experiments/{experimentId}".format(experimentId='experiment_id_example'),
-    #    headers=headers,
-    #)
+    response = client.request(
+        "DELETE",
+        "/experiments/{experimentId}".format(experimentId='1'),
+        headers=headers,
+    )
 
     # uncomment below to assert the status code of the HTTP response
-    #assert response.status_code == 200
+    assert response.status_code == 200
 
 
 def test_get_experiment(client: TestClient):
@@ -59,14 +71,14 @@ def test_get_experiment(client: TestClient):
     headers = {
     }
     # uncomment below to make a request
-    #response = client.request(
-    #    "GET",
-    #    "/experiments/{experimentId}".format(experimentId='experiment_id_example'),
-    #    headers=headers,
-    #)
+    response = client.request(
+        "GET",
+        "/experiments/{experimentId}".format(experimentId='1'),
+        headers=headers,
+    )
 
     # uncomment below to assert the status code of the HTTP response
-    #assert response.status_code == 200
+    assert response.status_code == 200
 
 
 def test_get_experiment_status(client: TestClient):
@@ -78,14 +90,14 @@ def test_get_experiment_status(client: TestClient):
     headers = {
     }
     # uncomment below to make a request
-    #response = client.request(
-    #    "GET",
-    #    "/experiments/{experimentId}/status".format(experimentId='experiment_id_example'),
-    #    headers=headers,
-    #)
+    response = client.request(
+        "GET",
+        "/experiments/{experimentId}/status".format(experimentId='1'),
+        headers=headers,
+    )
 
     # uncomment below to assert the status code of the HTTP response
-    #assert response.status_code == 200
+    assert response.status_code == 200
 
 
 def test_get_experiments(client: TestClient):
@@ -97,14 +109,14 @@ def test_get_experiments(client: TestClient):
     headers = {
     }
     # uncomment below to make a request
-    #response = client.request(
-    #    "GET",
-    #    "/experiments",
-    #    headers=headers,
-    #)
+    response = client.request(
+        "GET",
+        "/experiments",
+        headers=headers,
+    )
 
     # uncomment below to assert the status code of the HTTP response
-    #assert response.status_code == 200
+    assert response.status_code == 200
 
 
 def test_update_experiment(client: TestClient):
@@ -112,17 +124,31 @@ def test_update_experiment(client: TestClient):
 
     Update an experiment.
     """
-    experiment_input = {"network_conditions":{"delay":"100ms","packet_loss":"1%"},"metrics_requested":["PSNR","SSIM"],"encoding_parameters":{"codec":"H.264","bitrate":"5000kbps","resolution":"1920x1080"},"description":"Experiment description text here","video_sources":["video1.mp4","video2.mp4"],"experiment_name":"Video Encoding Test"}
+    experiment_input = {
+        "experimentName": "Streaming Test A",
+        "description": "Testing encoding and network parameters",
+        "videoSources": ["intro.mp4", "main.mp4"],
+        "encodingParameters": {
+            "codec": "h265",
+            "bitrate": "3000",
+            "resolution": "1280x720"
+        },
+        "networkConditions": {
+            "packet_loss": "0.01",
+            "delay": "100"
+        },
+        "metricsRequested": ["latency", "packetLoss", "bitrate"]
+    }
 
     headers = {
     }
     # uncomment below to make a request
-    #response = client.request(
-    #    "PUT",
-    #    "/experiments/{experimentId}".format(experimentId='experiment_id_example'),
-    #    headers=headers,
-    #    json=experiment_input,
-    #)
+    response = client.request(
+        "PUT",
+        "/experiments/{experimentId}".format(experimentId='experiment_id_example'),
+        headers=headers,
+        json=experiment_input,
+    )
 
     # uncomment below to assert the status code of the HTTP response
-    #assert response.status_code == 200
+    assert response.status_code == 200
